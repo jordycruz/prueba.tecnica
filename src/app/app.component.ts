@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {mascotaModel} from './models/mascota';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,8 +11,19 @@ import {mascotaModel} from './models/mascota';
 export class AppComponent {
   items: MenuItem[] = [];
   urlLogo: String = 'https://w7.pngwing.com/pngs/140/543/png-transparent-logo-company-business-business-blue-angle-company.png';
-
   historial: Array<mascotaModel> = [];
+
+  //Actualizar registros
+  editar: boolean = false;
+  idEditar: Number = 0;
+  nuevoRegistro: mascotaModel = {
+    id: 0,
+    nombreMascota: '',
+    edad: 0,
+    estado: '',
+    ultimaRevision: '',
+  };
+  displayModal: boolean = false;
 
   ngOnInit() {
     this.items = [
@@ -70,14 +82,42 @@ export class AppComponent {
     ];
   }
 
+  public limpiarFormulario() {
+    this.nuevoRegistro = {
+      id: 0,
+      nombreMascota: '',
+      edad: 0,
+      estado: '',
+      ultimaRevision: '',
+    };
+  }
+
   public eliminarRegistro(id:Number) {
     const index = this.historial.findIndex((item) => item.id === id);
     this.historial.splice(index, 1);
   }
 
-  public editarRegistro(id:Number) {
-    const index = this.historial.findIndex((item) => item.id === id);
-    console.log(index);
-    
+  public abrirModal(id:Number) {
+    this.displayModal = true;
+    this.editar = false;
+    this.idEditar = id;
+  }
+
+  public abrirModalRegistro(){
+    this.displayModal = true;
+    this.editar = true;
+  }
+
+  public crearRegistro() {
+    this.historial.push(this.nuevoRegistro);
+    this.displayModal = false;
+    this.limpiarFormulario();
+  }
+  
+  public actualizarRegistro() {
+    const index = this.historial.findIndex((item) => item.id === this.idEditar);
+    this.historial[index] = this.nuevoRegistro;
+    this.displayModal = false;
+    this.limpiarFormulario();
   }
 }

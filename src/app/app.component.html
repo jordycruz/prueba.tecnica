@@ -8,7 +8,15 @@
     </p-menubar>
   </header>
   <hr>
-  <h2>Historial Clinico</h2>
+  <div>
+    <h2>Historial Clinico</h2> 
+    <p-button 
+      (onClick)="abrirModalRegistro()"
+      [style]="{width: '200px', margin: '15px 0px'}"
+      label="Nuevo registro" 
+      class="p-button-danger">
+    </p-button>
+  </div>
   <p-table [rowHover]="true" [value]="historial" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
@@ -27,9 +35,36 @@
           <td>{{historial.ultimaRevision}}</td>
           <td>
             <p-button class="eliminar" label="Eliminar" class="p-button-danger" (onClick)="eliminarRegistro(historial.id)"></p-button>
-            <p-button class="editar" label="Editar" class="p-button-danger" (onClick)="editarRegistro(historial.id)"></p-button>
+            <p-button class="editar" label="Editar" class="p-button-danger" (onClick)="abrirModal(historial.id)"></p-button>
           </td>
         </tr>
     </ng-template>
  </p-table>
 </div>
+
+
+<p-dialog [modal]="true" header="Editar historico" [style]="{width: '450px'}" [(visible)]="displayModal">
+  <form class="formulario-edicion">    
+    <input required placeholder="Nombre Mascota" type="text" pInputText  [(ngModel)]="nuevoRegistro.nombreMascota" name="mascotaNombre"  />
+    <input placeholder="Edad Mascota" type="text" pInputText  [(ngModel)]="nuevoRegistro.edad" name="edad"/>
+    <input placeholder="estado" type="text" pInputText  [(ngModel)]="nuevoRegistro.estado"  name="estado"/>
+    <input placeholder="Ultima revision" type="text" pInputText [(ngModel)]="nuevoRegistro.ultimaRevision" name="fecha"/>
+
+    <p-button 
+     *ngIf="editar === false"
+      (onClick)="actualizarRegistro()"
+      [style]="{width: '100%', margin: '15px 0px'}" 
+      class="editar" 
+      label="Actualizar" 
+      class="p-button-danger">
+    </p-button>
+    <p-button 
+     *ngIf="editar === true"
+      (onClick)="crearRegistro()"
+      [style]="{width: '100%', margin: '15px 0px'}" 
+      class="editar" 
+      label="Crear" 
+      class="p-button-danger">
+    </p-button>
+  </form>
+</p-dialog>
