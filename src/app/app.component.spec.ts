@@ -1,13 +1,34 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Request, Response } from "express";
 import { AppComponent } from './app.component';
+import { FormsModule} from '@angular/forms';
+import { ErrorTailorModule } from '@ngneat/error-tailor';
+import { ReactiveFormsModule } from '@angular/forms';
+
+
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
-      ],
+        
+        RouterTestingModule,
+          FormsModule,
+          ReactiveFormsModule,
+          ErrorTailorModule.forRoot({
+            errors: {
+              useFactory() {
+                return {
+                  required: 'This field is required',
+                  minlength: ({ requiredLength, actualLength }) => `Expect ${requiredLength} but got ${actualLength}`,
+                  invalidAddress: error => `Address not valid`
+                };
+              },
+              deps: []
+            }
+          })
+        ],
       declarations: [
         AppComponent
       ],

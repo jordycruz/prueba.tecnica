@@ -109,11 +109,33 @@ export class AppComponent {
   }
 
   public crearRegistro() {
-    this.historial.push(this.nuevoRegistro);
+
+  if(this.nuevoRegistro.edad<0){
+    
     this.displayModal = false;
     this.limpiarFormulario();
-  }
+    console.log("Los campos son obligatorios" );
+  }else if(this.nuevoRegistro.estado=='')   {
+   
+    this.displayModal = false;
+    this.limpiarFormulario();
+    console.log("Los campos son obligatorios" );
+  }else if(this.nuevoRegistro.nombreMascota==''  )   {
+  ;
+    this.displayModal = false;
+    this.limpiarFormulario();
+    console.log("Los campos son obligatorios" );
+  }else if(this.nuevoRegistro.ultimaRevision=='' ){ 
+    console.log("Los campos son obligatorios" );
+    this.displayModal = false;
+    this.limpiarFormulario();
+  }else{
+    this.historial.push(this.nuevoRegistro);
+    this.limpiarFormulario();
+    this.displayModal = false;
   
+}
+}
   public actualizarRegistro() {
     const index = this.historial.findIndex((item) => item.id === this.idEditar);
     this.historial[index] = this.nuevoRegistro;

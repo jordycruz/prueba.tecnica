@@ -10,13 +10,14 @@ import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
 import {InputTextModule} from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
+    
     BrowserModule,
     AppRoutingModule,
     MenubarModule,
@@ -26,6 +27,8 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     InputTextModule,
     FormsModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
