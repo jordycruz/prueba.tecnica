@@ -12,9 +12,15 @@ import {DialogModule} from 'primeng/dialog';
 import {InputTextModule} from 'primeng/inputtext';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import {DividerModule} from 'primeng/divider';
+import { ListadoHsitoricoComponent } from './listado-hsitorico/listado-hsitorico.component';
+
 @NgModule({
   declarations: [
     AppComponent,
+    ListadoHsitoricoComponent,
   ],
   imports: [
     
@@ -28,6 +34,9 @@ import { ToastrModule } from 'ngx-toastr';
     InputTextModule,
     FormsModule,
     ReactiveFormsModule,
+    MessagesModule,
+    MessageModule,
+    DividerModule,
     ToastrModule.forRoot(),
   ],
   providers: [],

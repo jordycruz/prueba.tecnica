@@ -1,0 +1,14 @@
+
+section.historial-clinico{
+  margin: 2% 6%;
+}
+
+.formulario-edicion input{
+    margin-top: 15px;
+    width: 100%;
+}
+
+.formulario-edicion p-button button {
+    margin-top: 15px;
+    width: 100%;
+}
